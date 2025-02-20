@@ -15,15 +15,15 @@ rows = table.find_all("tr")
 file = open("საიტები.txt", "w", encoding = "utf-8")
 
 for index, row in enumerate(rows, 1):
-
     columns = row.find_all("td")
-    
-    file.write(f"{index}.  {columns[5].find('span').text}, {columns[6].find('span').text}\n")
 
-    # print(f"{columns[3].find('a', {'class': 'site_title'}).text} ({columns[3].find('a', {'class': 'cat_name_list'}).text}") ამ კონსტრუქციით ვცდილობდი საიტის სახელზე წვდომას
+    site_data = columns[2].find_all("a")
+
+    file.write(f"{index}. {site_data[0].text} - {site_data[1].text.strip()} - {columns[5].find('span').text} - {columns[6].find('span').text}\n")
 
     if index > 20:
-        break 
-file.close()  
+        break
 
+file.close() 
+ 
 print("მონაცემები წარმატებით ჩაიწერა ფაილში!")
